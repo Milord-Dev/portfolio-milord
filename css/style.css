@@ -10,6 +10,41 @@ body{
     font-family: "Pixelify Sans", sans-serif;
     color: #fff;
 }
+section{
+    padding: 20px 100px 20px 100px;
+}
 /** ELEMENTOS CLASES */
+.seccion-contenedor{
+    padding: 20px 100px 20px 100px;
+}
+
+/** NAV-BAR */
+.logoNav{
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+}
+.nav-contenedor{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.nav-contenedor a{
+    text-decoration: none;
+    color: #fff;
+}
+.nav-number{
+    color: #FF5376;
+}
 
 /** CLASE IDS */
+
+/** NAV-BAR */
+#navBar-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#logoDev{
+    color: #FF5376;
+}

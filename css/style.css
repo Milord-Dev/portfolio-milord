@@ -48,3 +48,31 @@ section{
 #logoDev{
     color: #FF5376;
 }
+
+/** INICIO */
+#inicio-contenedor{
+    margin-top: 130px;
+    margin-bottom: 170px;
+}
+#inicio-contenedor h3{
+    font-size: 28px;
+    color: #FF5376;
+}
+#inicio-contenedor h1{
+    font-size: 90px;
+}
+#inicio-contenedor p{
+    max-width: 700px;
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+#iconos-redes{
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+#iconos-redes a{
+    color: #FF5376;
+    font-size: 30px;
+}

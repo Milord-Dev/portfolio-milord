@@ -36,17 +36,48 @@ section{
 }
 
 .habilidades-flex{
-    margin-top: 70px;
-    margin-bottom: 70px;
+    margin-top: 80px;
+    margin-bottom: 80px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
+    align-items: stretch;
 }
 .cards-habilidades{
-    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
     color: #000000;
     border: 1px solid #0E151C;
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    text-align: left;
+}
+.cards-habilidades h3{
+    font-size: 40px;
+    color: #FF5376;
+    font-weight: bold;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 10px;
+}
+.cards-habilidades p{
+    font-size: 18px;
+    margin-top: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+.cards-habilidades ul{
+    font-size: 18px;
+    list-style: none;
+    padding: 0;
+}
+.cards-habilidades ul li{
+    margin: 8px 0;
+    padding: 8px 0;
+    font-weight: 500;
+    color: #333;
 }
 
 /** CLASE IDS */
@@ -97,17 +128,10 @@ section{
 #habilidades-contenedor h2{
     font-size: 50px;
     margin-top: 15px;
-}
-#habilidades-contenedor h3{
-    font-size: 28px;
-    color: #FF5376;
+    font-weight: bold;
 }
 #habilidades-contenedor h4{
     font-size: 22px;
     color: #FF5376;
-    margin-top: 10px;
-}
-#habilidades-contenedor p{
-    font-size: 22px;
     margin-top: 10px;
 }

@@ -42,6 +42,13 @@ section{
     flex-direction: column;
     gap: 20px;
 }
+.cards-habilidades{
+    padding: 30px;
+    color: #000000;
+    border: 1px solid #0E151C;
+    border-radius: 10px;
+}
+
 /** CLASE IDS */
 
 /** NAV-BAR */
@@ -91,12 +98,16 @@ section{
     font-size: 50px;
     margin-top: 15px;
 }
+#habilidades-contenedor h3{
+    font-size: 28px;
+    color: #FF5376;
+}
 #habilidades-contenedor h4{
     font-size: 22px;
     color: #FF5376;
     margin-top: 10px;
 }
-#habilidades-contenedor h3{
-    font-size: 28px;
-    color: #FF5376;
+#habilidades-contenedor p{
+    font-size: 22px;
+    margin-top: 10px;
 }

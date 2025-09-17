@@ -35,6 +35,7 @@ section{
     text-align: center;
 }
 
+/** HABILIDADES */
 .habilidades-flex{
     margin-top: 60px;
     margin-bottom: 100px;
@@ -53,6 +54,7 @@ section{
     border-radius: 15px;
     box-shadow: 0 20px 20px rgba(0,0,0,0.1);
     text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .cards-habilidades h3{
     font-size: 40px;
@@ -79,6 +81,10 @@ section{
     padding: 5px 0;
     font-weight: 500;
     color: #444;
+}
+.cards-habilidades:hover {
+    transform: scale(1.05) translateZ(0);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 /** CLASE IDS */

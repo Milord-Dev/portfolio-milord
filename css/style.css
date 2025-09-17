@@ -36,8 +36,8 @@ section{
 }
 
 .habilidades-flex{
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 60px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -76,7 +76,7 @@ section{
 }
 .cards-habilidades ul li{
     margin: 8px 0;
-    padding: 8px 0;
+    padding: 5px 0;
     font-weight: 500;
     color: #444;
 }

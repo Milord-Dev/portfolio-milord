@@ -46,7 +46,7 @@ section{
 }
 .cards-habilidades{
     width: 100%;
-    max-width: 900px;
+    max-width: 830px;
     margin: 0 auto;
     padding: 30px;
     color: #000000;
@@ -97,6 +97,11 @@ section{
 .cards-habilidades:hover {
     transform: scale(1.05) translateZ(0);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.logo-habilidad{
+    width: 40px;
+    height: auto;
+    margin-top: 10px;
 }
 
 /** CLASE IDS */

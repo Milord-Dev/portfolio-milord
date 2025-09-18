@@ -27,6 +27,9 @@ section{
     text-decoration: none;
     color: #fff;
 }
+.nav-contenedor a:hover{
+    color: #FF5376;
+}
 .nav-number{
     color: #FF5376;
 }
@@ -133,7 +136,7 @@ section{
     font-size: 22px;
     margin-top: 10px;
 }
-
+/** ICONOS */
 #iconos-redes{
     margin-top: 25px;
     display: flex;
@@ -142,6 +145,9 @@ section{
 #iconos-redes a{
     color: #FF5376;
     font-size: 30px;
+}
+#iconos-redes a:hover{
+    color: #fff;
 }
 
 /** HABILIDADES */

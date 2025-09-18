@@ -82,6 +82,18 @@ section{
     font-weight: 500;
     color: #444;
 }
+.cards-habilidades-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+.cards-habilidades-title a{
+    font-size: 24px;
+    color: #0E151C;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
 .cards-habilidades:hover {
     transform: scale(1.05) translateZ(0);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);

@@ -107,6 +107,20 @@ section{
     margin-top: 10px;
 }
 
+/** SOBRE MI */
+.sobreMi-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+.sobreMi-flex img{
+    width: auto;
+    height: 300px;
+    border-radius: 10px;
+}
+
 /** CLASE IDS */
 
 /** NAV-BAR */
@@ -164,4 +178,24 @@ section{
     font-size: 25px;
     color: #FF5376;
     margin-top: 15px;
+}
+/** SOBRE MI */
+#sobreMi-contenedor h2{
+    font-size: 50px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+#sobreMi-contenedor h4{
+    font-size: 25px;
+    color: #FF5376;
+    margin-top: 20px;
+}
+#sobreMi-contenedor-texto{
+    margin-top: 20px;
+}
+#sobreMi-contenedor-texto p{
+    font-size: 18px;
+    margin-top: 20px;
+    line-height: 1.6;
+    max-width: 700px;
 }

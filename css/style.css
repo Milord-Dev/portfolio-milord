@@ -151,6 +151,7 @@ section{
     font-size: 22px;
     margin-top: 10px;
 }
+
 /** ICONOS */
 #iconos-redes{
     margin-top: 25px;
@@ -180,13 +181,14 @@ section{
     color: #FF5376;
     margin-top: 15px;
 }
+
 /** SOBRE MI */
 #sobreMi-contenedor{
-    margin-bottom: 100px;
+    margin-bottom: 110px;
 }
 #sobreMi-contenedor h2{
     font-size: 50px;
-    margin-top: 15px;
+    margin-top: 25px;
     font-weight: bold;
 }
 #sobreMi-contenedor h4{
@@ -223,6 +225,7 @@ section{
     background-color: #FF5376;
     color: #fff;
 }
+
 /** PROJECTS */
 #proyectos-contenedor{
     margin-bottom: 100px;

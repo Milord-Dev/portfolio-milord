@@ -122,6 +122,32 @@ section{
     flex-shrink: 0;
 }
 
+/** PROJECTS */
+.proyecto-contenido{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.proyecto-flex{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 80px;
+
+}
+.proyecto-flex img{
+    width: 250px;
+    height: auto;
+    border-radius: 15px;
+}
+.proyecto-flex h3{
+    font-size: 28px;
+    color: #FF5376;
+}
+.proyecto-card:hover {
+    transform: scale(1.05) translateZ(0);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
 /** CLASE IDS */
 
 /** NAV-BAR */
@@ -184,11 +210,11 @@ section{
 
 /** SOBRE MI */
 #sobreMi-contenedor{
-    margin-bottom: 110px;
+    margin-bottom: 140px;
 }
 #sobreMi-contenedor h2{
     font-size: 50px;
-    margin-top: 25px;
+    margin-top: 40px;
     font-weight: bold;
 }
 #sobreMi-contenedor h4{
@@ -231,4 +257,15 @@ section{
     margin-bottom: 100px;
     background-color: #E0E1DD;
     color: #000;
+}
+#proyectos-contenedor h2{
+    font-size: 50px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+#proyectos-contenedor h4{
+    font-size: 25px;
+    color: #FF5376;
+    margin-top: 15px;
+    text-align: center;
 }

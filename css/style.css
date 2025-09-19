@@ -110,15 +110,16 @@ section{
 /** SOBRE MI */
 .sobreMi-flex{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
+    justify-content: flex-start; 
+    align-items: flex-start;
+    gap: 50px;
     margin-top: 50px;
 }
-.sobreMi-flex img{
-    width: auto;
-    height: 300px;
-    border-radius: 10px;
+.sobreMi-flex img {
+    width: 250px;  
+    height: auto;
+    border-radius: 15px;
+    flex-shrink: 0;
 }
 
 /** CLASE IDS */
@@ -191,11 +192,32 @@ section{
     margin-top: 20px;
 }
 #sobreMi-contenedor-texto{
-    margin-top: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 #sobreMi-contenedor-texto p{
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 10px;
     line-height: 1.6;
-    max-width: 700px;
+    max-width: 800px;
+}
+#btn-CV {
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: #E0E1DD;
+    color: #000;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    max-width: 180px;
+    text-align: center;
+}
+
+#btn-CV:hover {
+    background-color: #FF5376;
+    color: #fff;
 }

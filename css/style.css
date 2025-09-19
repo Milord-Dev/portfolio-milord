@@ -181,6 +181,9 @@ section{
     margin-top: 15px;
 }
 /** SOBRE MI */
+#sobreMi-contenedor{
+    margin-bottom: 100px;
+}
 #sobreMi-contenedor h2{
     font-size: 50px;
     margin-top: 15px;
@@ -216,8 +219,13 @@ section{
     max-width: 180px;
     text-align: center;
 }
-
 #btn-CV:hover {
     background-color: #FF5376;
     color: #fff;
+}
+/** PROJECTS */
+#proyectos-contenedor{
+    margin-bottom: 100px;
+    background-color: #E0E1DD;
+    color: #000;
 }

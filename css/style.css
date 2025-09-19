@@ -129,23 +129,20 @@ section{
 }
 .proyecto-flex{
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 80px;
-
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
 }
 .proyecto-flex img{
     width: 250px;
     height: auto;
     border-radius: 15px;
+
 }
 .proyecto-flex h3{
     font-size: 28px;
     color: #FF5376;
-}
-.proyecto-card:hover {
-    transform: scale(1.05) translateZ(0);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 /** CLASE IDS */
@@ -268,4 +265,20 @@ section{
     color: #FF5376;
     margin-top: 15px;
     text-align: center;
+}
+#proyecto-flex-cards{
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    color: #000000;
+    border: 1px solid #0E151C;
+    border-radius: 15px;
+    box-shadow: 0 20px 20px rgba(0,0,0,0.1);
+    text-align: left;   
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#proyecto-flex-cards:hover{
+    transform: scale(1.05) translateZ(0);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }

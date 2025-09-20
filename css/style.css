@@ -163,9 +163,17 @@ section{
 
 /** NAV-BAR */
 #navBar-flex{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 15px 100px;
+    background-color: #0E151C;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
 }
 #logoDev{
     color: #FF5376;

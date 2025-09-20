@@ -295,3 +295,52 @@ section{
     transform: scale(1.05) translateZ(0);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+/** CONTACT */
+#contacto-contenedor{
+    margin-bottom: 50px;
+}
+#contacto-contenedor h2{
+    font-size: 50px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+#contacto-contenedor h4{
+    font-size: 25px;
+    color: #FF5376;
+    margin-top: 15px;
+}
+#contacto-contenedor form{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+#contacto-contenedor form input,
+#contacto-contenedor form textarea{
+    padding: 10px;
+    border: 1px solid #0E151C;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+}
+#contacto-contenedor form button{
+    padding: 10px 20px;
+    background-color: #FF5376;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+#contacto-contenedor form button:hover{
+    background-color: #fff;
+    color: #FF5376;
+}
+
+#footer-contenedor{
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+

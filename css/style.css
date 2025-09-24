@@ -374,7 +374,8 @@ section{
 
 /** CONTACT */
 #contacto-contenedor{
-    margin-bottom: 50px;
+    background-color: #E0E1DD;
+    color: #000000;
 }
 #contacto-contenedor h2{
     font-size: 50px;
@@ -404,7 +405,7 @@ section{
 #contacto-contenedor form button{
     padding: 10px 20px;
     background-color: #FF5376;
-    color: #fff;
+    color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;

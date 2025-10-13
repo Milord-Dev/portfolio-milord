@@ -125,7 +125,7 @@ section{
 /** PROJECTS */
 .proyecto-contenido{
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 140px;
 }
 .proyecto-flex{
     display: flex;
@@ -144,6 +144,11 @@ section{
     font-size: 28px;
     color: #FF5376;
 }
+.proyecto-flex p{
+    font-size: 16px;
+    margin-top: 15px;
+    line-height: 0.5;
+}
 .btn-proyecto{
     display: inline-block;
     margin: 15px 0;
@@ -160,53 +165,47 @@ section{
 }
 
 /** RECOMENDACIONES */
-.recomendaciones-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
+.certificaciones-flex{
+    margin-top: 60px;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
 }
-.card-recomendacion {
+.certificaciones-card img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.certificaciones-card {
     background: #1a1f29;
+    max-width: 500px;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.card-recomendacion:hover {
+.certificaciones-card:hover {
     transform: scale(1.03);
     box-shadow: 0 15px 25px rgba(0,0,0,0.4);
 }
-.card-recomendacion h3 {
+.certificaciones-card h3 {
     font-size: 24px;
     color: #fff;
     margin-bottom: 15px;
     text-align: center;
 }
-.card-recomendacion h3:hover {
+.certificaciones-card h3:hover {
     color: #FF5376;
 }
-.card-recomendacion p {
+.certificaciones-card p {
     font-size: 16px;
     line-height: 1.5;
     color: #ddd;
     margin-top: 15px;
-    text-align: justify;
-}
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-    overflow: hidden;
-    border-radius: 10px;
-}
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    text-align: center;
 }
 
 /** CLASE IDS */

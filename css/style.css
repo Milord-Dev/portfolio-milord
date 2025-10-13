@@ -355,16 +355,16 @@ section{
 }
 
 /** RECOMENDACIONES */
-#recomendaciones-contenedor{
+#certificaciones-contenedor{
     margin: 25px 0;
 }
-#recomendaciones-contenedor h2{
+#certificaciones-contenedor h2{
     font-size: 50px;
     margin-top: 15px;
     font-weight: bold;
     text-align: center;
 }
-#recomendaciones-contenedor h4{
+#certificaciones-contenedor h4{
     font-size: 25px;
     color: #FF5376;
     margin-top: 15px;

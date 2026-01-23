@@ -130,6 +130,7 @@ ul {
     margin-bottom: 25px;
     background: linear-gradient(90deg, var(--text-color) 0%, var(--accent-color) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

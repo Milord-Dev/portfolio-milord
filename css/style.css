@@ -1,54 +1,96 @@
 :root {
-    --bg-color: #FAFAFA;
-    --text-color: #2C3E50;
-    --text-light: #546E7A;
-    --accent-color: #607D8B; /* Blue Grey - Elegant & Aesthetic */
-    --accent-hover: #455A64;
-    --card-bg: #FFFFFF;
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Geologica', sans-serif;
-    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-    --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
-    --radius: 16px;
+    /* Apple Color Palette */
+    --bg-body: #F5F5F7;
+    --bg-card: #FFFFFF;
+    --text-primary: #1D1D1F;
+    --text-secondary: #86868B;
+    --accent-color: #0071E3; /* Apple Blue */
+    --accent-hover: #0077ED;
+    --border-color: #D2D2D7;
+    
+    /* Typography */
+    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    
+    /* Layout */
+    --radius-card: 24px;
+    --radius-btn: 980px; /* Pill shape */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --container-width: 1024px; /* Apple often uses tighter containers for text content */
 }
 
 html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    background-color: var(--bg-color);
-    font-family: var(--font-body);
-    color: var(--text-color);
-    line-height: 1.8;
-    overflow-x: hidden;
+    background-color: var(--bg-body);
+    font-family: var(--font-stack);
+    color: var(--text-primary);
+    line-height: 1.47059;
+    letter-spacing: -0.022em;
+    font-size: 17px;
+    margin: 0;
 }
 
 /* Typography Defaults */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    color: var(--text-color);
-    line-height: 1.2;
+    font-family: var(--font-stack);
+    color: var(--text-primary);
+    margin-top: 0;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 48px; /* 56px in desktop often */
+    line-height: 1.07143;
+    letter-spacing: -0.005em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: 0em;
+}
+
+h3 {
+    font-size: 24px;
+    line-height: 1.16667;
+    letter-spacing: .009em;
+}
+
+p {
+    margin-bottom: 1em;
 }
 
 a {
     text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
+    color: var(--accent-color);
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Layout */
+/* Layout Containers */
 .seccion-contenedor, section {
-    padding: 100px 10%;
-    max-width: 1440px;
+    padding: 100px 20px;
+    max-width: var(--container-width);
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
-/* Header & Nav */
+/* Header & Nav - Apple Style */
 #encabezado-contenedor {
     padding: 0;
 }
@@ -59,471 +101,431 @@ ul {
     left: 0;
     right: 0;
     width: 100%;
-    padding: 20px 5%;
-    background-color: rgba(250, 250, 250, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    height: 48px; /* Classic Apple nav height */
+    padding: 0 max(22px, env(safe-area-inset-left));
+    background-color: rgba(251, 251, 253, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centered content wrapper */
     align-items: center;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
+    z-index: 9999;
+    border-bottom: 1px solid rgba(0,0,0,0.16); /* Very subtle separator sometimes used, or none */
+    transition: background-color 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
+}
+
+/* We need a wrapper to center content max-width inside the full width nav */
+#navBar-flex {
+    justify-content: space-between;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* To simulate the centered container in nav */
+@media (min-width: 1024px) {
+    #navBar-flex {
+        padding: 0 calc(50% - 500px); /* Centers roughly around 1000px content */
+    }
 }
 
 .logoNav {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    font-family: var(--font-heading);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none !important;
+    letter-spacing: -0.01em;
+    display: flex;
+    gap: 4px;
 }
 
-#logoMilord {
-    color: var(--text-color);
-}
-
-#logoDev {
-    color: var(--accent-color);
-}
+#logoMilord { color: var(--text-primary); }
+#logoDev { color: var(--text-secondary); }
 
 .nav-contenedor {
     display: flex;
-    gap: 40px;
+    gap: 24px;
+    align-items: center;
+}
+
+.nav-contenedor li {
+    display: inline-block;
 }
 
 .nav-contenedor a {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.8);
+    text-decoration: none !important;
+    letter-spacing: -0.01em;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
 .nav-contenedor a:hover {
+    opacity: 1;
     color: var(--accent-color);
 }
 
-.nav-number {
-    display: none; /* Minimalist: Hide numbers */
-}
+.nav-number { display: none; }
+.nav-text { display: inline-block; }
 
 /* Hero Section */
 #inicio-contenedor {
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0;
-    padding-top: 80px; /* Offset for fixed header */
+    align-items: center;
+    text-align: center;
+    padding-top: 60px;
 }
 
 #inicio-contenedor h3 {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 21px;
+    font-weight: 600;
     color: var(--accent-color);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 #inicio-contenedor h1 {
-    font-size: 4.5rem;
-    font-weight: 800;
-    letter-spacing: -2px;
-    margin-bottom: 25px;
-    background: linear-gradient(90deg, var(--text-color) 0%, var(--accent-color) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 56px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 20px;
+    max-width: 800px;
 }
 
 #inicio-contenedor p {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    max-width: 600px;
-    margin-bottom: 40px;
+    font-size: 24px;
+    line-height: 1.33341;
+    font-weight: 400;
+    letter-spacing: .009em;
+    color: var(--text-primary);
+    max-width: 660px;
+    margin: 0 auto 40px auto;
 }
 
 #iconos-redes {
     display: flex;
-    gap: 25px;
+    gap: 30px;
+    margin-top: 20px;
 }
 
 #iconos-redes a {
-    font-size: 24px;
-    color: var(--text-light);
+    font-size: 28px;
+    color: var(--text-primary);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 #iconos-redes a:hover {
     color: var(--accent-color);
-    transform: translateY(-3px);
+    transform: scale(1.1);
 }
 
-/* Section Titles */
+/* Global Section Styling */
 .section-title-sub-title, h2 {
-    font-size: 3rem;
+    font-size: 48px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: 700;
 }
 
 h4 {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 21px;
+    line-height: 1.381;
     font-weight: 400;
-    color: var(--text-light);
+    letter-spacing: .011em;
+    color: var(--text-secondary);
     margin-bottom: 60px;
-    font-style: italic;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    font-style: normal;
 }
 
-/* Habilidades */
-#habilidades-contenedor {
-    background-color: var(--bg-color);
-}
-
-.habilidades-flex {
+/* Cards & Grid System */
+.habilidades-flex, .proyecto-contenido, .certificaciones-flex {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
 
-.cards-habilidades {
-    background-color: var(--card-bg);
+/* Apple-style Cards: White on Light Grey */
+.cards-habilidades, .proyecto-flex, .certificaciones-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
     padding: 40px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(0,0,0,0.03);
-    transition: all 0.4s ease;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: none;
+    overflow: hidden;
 }
 
-.cards-habilidades:hover {
-    transform: translateY(-10px);
+.cards-habilidades:hover, .proyecto-flex:hover, .certificaciones-card:hover {
+    transform: scale(1.02);
     box-shadow: var(--shadow-hover);
+}
+
+/* Habilidades */
+.habilidades-flex {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .cards-habilidades-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 15px;
 }
 
 .cards-habilidades h3 {
-    font-size: 1.5rem;
-    color: var(--text-color);
+    font-size: 24px;
+    font-weight: 600;
     margin: 0;
 }
 
 .cards-habilidades-title i {
-    font-size: 1.5rem;
+    font-size: 24px;
     color: var(--accent-color);
 }
 
 .cards-habilidades p {
-    color: var(--text-light);
+    color: var(--text-secondary);
+    font-size: 15px;
     margin-bottom: 20px;
-    font-size: 1rem;
 }
 
 .cards-habilidades ul li {
-    color: var(--text-color);
+    font-size: 15px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
     font-weight: 500;
-    margin-bottom: 8px;
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 .cards-habilidades ul li::before {
-    content: "•";
-    color: var(--accent-color);
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
 }
 
 .logo-habilidad {
-    width: 40px;
-    margin-top: 20px;
-    margin-right: 10px;
-    opacity: 0.8;
-    transition: opacity 0.3s;
+    width: 36px;
+    margin-top: 15px;
+    margin-right: 12px;
+    filter: grayscale(100%); /* Clean look */
+    opacity: 0.6;
+    transition: all 0.3s;
 }
 
 .cards-habilidades:hover .logo-habilidad {
+    filter: grayscale(0%);
     opacity: 1;
 }
 
-/* Sobre Mi */
+/* Sobre Mi - Bento Grid Style if possible, but let's stick to flex */
 .sobreMi-flex {
     display: flex;
     align-items: center;
     gap: 60px;
-    background-color: var(--card-bg);
+    background-color: var(--bg-card);
     padding: 60px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
 }
 
 .sobreMi-flex img {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
     object-fit: cover;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
+    border-radius: 50%; /* Circular profile for person usually looks good in Apple style or rounded rect */
+    border-radius: var(--radius-card);
 }
 
 #sobreMi-contenedor-texto p {
-    color: var(--text-light);
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    font-size: 17px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
 }
 
-#btn-CV {
+/* Button - Apple Style "Buy" or "Download" buttons */
+#btn-CV, .btn-proyecto, button[type="submit"] {
     display: inline-block;
-    margin-top: 20px;
-    padding: 15px 35px;
-    background-color: var(--text-color);
-    color: white;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-#btn-CV:hover {
     background-color: var(--accent-color);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(96, 125, 139, 0.3);
+    color: #fff !important;
+    padding: 12px 24px;
+    border-radius: var(--radius-btn);
+    font-size: 14px;
+    font-weight: 600; /* Medium weight */
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+    letter-spacing: -0.01em;
 }
 
-/* Projects */
-#proyectos-contenedor {
-    background-color: var(--bg-color);
+#btn-CV:hover, .btn-proyecto:hover, button[type="submit"]:hover {
+    background-color: var(--accent-hover);
+    transform: none; /* Apple buttons usually just change color */
+    text-decoration: none;
 }
 
-.proyecto-contenido {
-    display: grid;
-    gap: 40px;
-}
-
+/* Proyectos */
 .proyecto-flex {
-    background-color: var(--card-bg);
-    padding: 40px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
     display: flex;
     align-items: center;
-    gap: 40px;
-    transition: all 0.4s ease;
-    border: 1px solid rgba(0,0,0,0.03);
-}
-
-.proyecto-flex:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-}
-
-.proyecto-flex > div:first-child {
-    flex: 1;
-}
-
-.proyecto-flex img {
-    width: 350px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    gap: 50px;
+    padding: 60px; /* More padding for cleaner look */
 }
 
 .proyecto-flex h3 {
-    font-size: 2rem;
+    font-size: 32px;
+    font-weight: 700;
     margin-bottom: 15px;
 }
 
 .proyecto-flex p {
-    color: var(--text-light);
-    margin-bottom: 10px;
-    line-height: 1.6;
+    color: var(--text-secondary);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.proyecto-flex img {
+    width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.proyecto-flex:hover img {
+    transform: scale(1.03);
 }
 
 .btn-proyecto {
-    display: inline-block;
-    margin-top: 20px;
+    background-color: transparent;
+    color: var(--accent-color) !important;
+    border: 1px solid var(--accent-color);
     margin-right: 10px;
-    padding: 8px 20px;
-    border: 1px solid var(--text-light);
-    border-radius: 50px;
-    color: var(--text-light);
-    font-size: 0.85rem;
-    font-weight: 500;
+    margin-top: 20px;
 }
 
 .btn-proyecto:hover {
-    background-color: var(--text-color);
-    color: white;
-    border-color: var(--text-color);
+    background-color: var(--accent-color);
+    color: #fff !important;
 }
 
 /* Certificaciones */
 .certificaciones-flex {
     display: flex;
     justify-content: center;
-    gap: 30px;
     flex-wrap: wrap;
+    gap: 30px;
 }
 
 .certificaciones-card {
-    background-color: var(--card-bg);
-    width: 100%;
     max-width: 400px;
-    padding: 30px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-}
-
-.certificaciones-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
+    padding: 50px 30px;
 }
 
 .certificaciones-card img {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 20px;
+    width: 80%;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .certificaciones-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-}
-
-.certificaciones-card p {
-    font-size: 0.95rem;
-    color: var(--text-light);
-    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 /* Contacto */
+#contacto-contenedor {
+    text-align: center;
+    padding-bottom: 150px;
+}
+
 #contacto-contenedor form {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-#contacto-contenedor form label {
-    display: none; /* Minimalist: Use placeholders */
-}
-
-#contacto-contenedor form input,
-#contacto-contenedor form textarea {
+#contacto-contenedor input, #contacto-contenedor textarea {
     width: 100%;
-    padding: 15px 20px;
-    background-color: var(--card-bg);
-    border: 1px solid rgba(0,0,0,0.1);
+    padding: 18px 20px;
     border-radius: 12px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--text-color);
-    transition: all 0.3s;
+    border: 1px solid #d2d2d7;
+    background-color: #fff; /* Input white */
+    font-family: var(--font-stack);
+    font-size: 17px;
+    color: var(--text-primary);
+    transition: border-color 0.2s;
 }
 
-#contacto-contenedor form input:focus,
-#contacto-contenedor form textarea:focus {
+#contacto-contenedor input:focus, #contacto-contenedor textarea:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(96, 125, 139, 0.1);
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
 }
 
-#contacto-contenedor form button {
-    padding: 15px;
-    background-color: var(--text-color);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-#contacto-contenedor form button:hover {
-    background-color: var(--accent-color);
+#contacto-contenedor button {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 17px;
+    padding: 18px;
 }
 
 /* Footer */
 #footer-contenedor {
-    background-color: var(--bg-color);
-    color: var(--text-light);
-    padding: 40px;
-    text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    background-color: #f5f5f7;
+    color: var(--text-secondary);
+    padding: 40px 0;
+    font-size: 12px;
+    border-top: 1px solid #e5e5e5;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+    #navBar-flex {
+        padding: 0 20px;
+    }
+    
+    .nav-contenedor {
+        display: none; /* Hide for mobile for now, minimalist */
+    }
+    
     #inicio-contenedor h1 {
-        font-size: 3rem;
+        font-size: 40px;
     }
     
-    .sobreMi-flex {
+    .sobreMi-flex, .proyecto-flex {
         flex-direction: column;
+        text-align: center;
         padding: 30px;
+        gap: 30px;
     }
     
-    .sobreMi-flex img {
+    .sobreMi-flex img, .proyecto-flex img {
         width: 100%;
-        height: auto;
+        max-width: 300px;
     }
     
     .proyecto-flex {
         flex-direction: column-reverse;
-        padding: 30px;
     }
     
-    .proyecto-flex img {
-        width: 100%;
-    }
-    
-    #navBar-flex {
-        padding: 15px 20px;
-    }
-    
-    .nav-contenedor {
-        display: none; /* Simple mobile hide for now, or use a hamburger menu if I could impl it, but sticking to css */
-    }
-    /* Minimalist mobile nav fix: Show specific icons or just scroll? 
-       Let's just keep it simple. If the user wants a mobile menu that's a bigger task. 
-       I will just stack them for now or let them wrap.
-    */
-    .nav-contenedor {
-        display: flex;
-        gap: 15px;
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(255,255,255,0.9);
-        padding: 15px 25px;
-        border-radius: 50px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        backdrop-filter: blur(10px);
-    }
-    .nav-text {
-        display: none;
-    }
-    .nav-contenedor a::before {
-        /* Use fontawesome content or similar if possible, but here we only have text. 
-           So let's just show text but smaller.
-        */
-        content: attr(href); /* Just a trick, but maybe not good. */
-    }
-    /* Actually, for a quick fix, let's just make the nav scrollable or smaller */
-    .nav-contenedor a {
-        font-size: 10px;
+    .section-title-sub-title, h2 {
+        font-size: 32px;
     }
 }

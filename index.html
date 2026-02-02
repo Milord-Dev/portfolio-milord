@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <canvas id="particles-canvas"></canvas>
     <!-- Header -->
     <header id="encabezado-contenedor" class="seccion-contenedor">
         <nav id="navBar-flex">
@@ -50,12 +51,6 @@
                         <span class="nav-text">Certificaciones</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#contacto-contenedor">
-                        <span class="nav-number">06</span>
-                        <span class="nav-text">Contacto</span>
-                    </a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -80,7 +75,7 @@
             <!-- Skills -->
             <section id="habilidades-contenedor">
                 <h2 class="section-title-sub-title">Habilidades</h2>
-                <h4 class="section-title-sub-title">“Habilidades técnicas y creativas que me permiten <br> desarrollar soluciones efectivas.”</h4>
+                <h4>“Habilidades técnicas y creativas que me permiten <br> desarrollar soluciones efectivas.”</h4>
                 <div class="habilidades-flex">
                     <!--Diseño-->
                     <div class="cards-habilidades">
@@ -229,29 +224,12 @@
                 </div>
             </section>
 
-            <!-- Contact -->
-            <section id="contacto-contenedor">
-                <h2>Contacto</h2>
-                <h4>
-                    “Si tienes alguna pregunta, comentario o simplemente quieres saludar, no dudes en ponerte en contacto conmigo. 
-                    Estoy aquí para ayudarte y compartir mis conocimientos.”
-                </h4>
-                <form action="">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" placeholder="Nombre" name="nombre" id="nombre" required>
-                    <label for="email">Email</label>
-                    <input type="email" placeholder="Email" name="email" id="email" required>
-                    <label for="mensaje">Mensaje</label>
-                    <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Mensaje"></textarea>
-                    <button type="submit">Enviar</button>
-                </form>
-            </section>
-
             <!-- Footer -->
             <footer id="footer-contenedor" class="seccion-contenedor">
                 <p>MilordDev &copy; 2023</p>
             </footer>
         </article>
     </main>
+    <script src="./js/index.js"></script>
 </body>
 </html>

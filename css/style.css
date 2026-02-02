@@ -26,13 +26,24 @@ html {
 }
 
 body {
-    background-color: var(--bg-body);
+    /* background-color: var(--bg-body); Removed to let canvas show */
+    background-color: transparent;
     font-family: var(--font-stack);
     color: var(--text-primary);
     line-height: 1.47059;
     letter-spacing: -0.022em;
     font-size: 17px;
     margin: 0;
+}
+
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--bg-body); /* Background moved here */
 }
 
 /* Typography Defaults */
@@ -177,7 +188,7 @@ ul {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 60px;
+    padding-top: 100px;
 }
 
 #inicio-contenedor h3 {
@@ -232,9 +243,9 @@ ul {
 
 h4 {
     text-align: center;
-    font-size: 21px;
-    line-height: 1.381;
-    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.5;
+    font-weight: 300;
     letter-spacing: .011em;
     color: var(--text-secondary);
     margin-bottom: 60px;
@@ -243,6 +254,22 @@ h4 {
     margin-right: auto;
     font-style: normal;
 }
+
+/* Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for children if needed, or handled by JS */
+
 
 /* Cards & Grid System */
 .habilidades-flex, .proyecto-contenido, .certificaciones-flex {

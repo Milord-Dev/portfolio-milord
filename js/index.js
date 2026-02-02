@@ -1,27 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
     // --- Scroll Animations ---
-    // Select elements to animate
     const animatedElements = document.querySelectorAll(
         'section > h1, section > h2, section > h3, section > h4, section > p, ' +
         '.cards-habilidades, .proyecto-flex, .certificaciones-card, #iconos-redes, .sobreMi-flex, .btn-proyecto'
     );
 
-    // Add base class to all elements
-    animatedElements.forEach((el, index) => {
+    animatedElements.forEach((el) => {
         el.classList.add('animate-on-scroll');
     });
 
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1 // Trigger when 10% of the element is visible
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Ensure animation happens only once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -30,154 +28,125 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(el);
     });
 
-    // --- Particle System (Antigravity/Repulsion Effect) ---
+    // --- 3D Sphere of Dots Animation ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     
-    let particlesArray;
+    let width, height;
+    let sphereRadius;
+    const dots = [];
+    const numberOfDots = 900; 
+    let rotationX = 0;
+    let rotationY = 0;
     
-    // Canvas sizing
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    // Mouse interaction
-    const mouse = {
-        x: null,
-        y: null,
-        radius: 150 // Interaction radius
-    };
-    
-    window.addEventListener('mousemove', function(event) {
-        mouse.x = event.x;
-        mouse.y = event.y;
-    });
-    
-    // Create Particle Class
-    class Particle {
-        constructor(x, y, directionX, directionY, size, color) {
-            this.x = x;
-            this.y = y;
-            this.directionX = directionX;
-            this.directionY = directionY;
-            this.size = size;
-            this.color = color;
-            this.baseX = x; // Remember original position for "gravity" return if desired, 
-                            // but for antigravity we usually just let them float.
-                            // Let's make them float freely but react to mouse.
-        }
+    // Mouse interaction for rotation
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetRotationX = 0.001;
+    let targetRotationY = 0.001;
+
+    // Resize handling
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
         
-        // Method to draw individual particle
-        draw() {
+        // Sphere radius configuration - Perfect Sphere
+        // Using 75% of the smaller dimension to fit screen
+        sphereRadius = Math.min(width, height) * 0.75; 
+        
+        initDots(); 
+    }
+    
+    window.addEventListener('resize', resize);
+
+    // Mouse movement listener
+    window.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / width) * 2 - 1;
+        const y = (e.clientY / height) * 2 - 1;
+        targetRotationY = x * 0.01; // Rotate around Y axis based on mouse X
+        targetRotationX = -y * 0.01; // Rotate around X axis based on mouse Y
+    });
+
+    // Initialize dots on sphere surface (Fibonacci Sphere algorithm for even distribution)
+    function initDots() {
+        dots.length = 0; // Clear existing dots
+        const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
+
+        for (let i = 0; i < numberOfDots; i++) {
+            const y = 1 - (i / (numberOfDots - 1)) * 2; // y goes from 1 to -1
+            const radiusAtY = Math.sqrt(1 - y * y); // Radius at y
+            
+            const theta = phi * i; // Golden angle increment
+            
+            // Standard Sphere coordinates
+            const x = Math.cos(theta) * radiusAtY * sphereRadius;
+            const yPos = y * sphereRadius;
+            const z = Math.sin(theta) * radiusAtY * sphereRadius; 
+
+            dots.push({
+                x: x,
+                y: yPos,
+                z: z
+            });
+        }
+    }
+
+    // Call resize initially to set up everything
+    resize();
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Smooth rotation update
+        rotationX += (targetRotationX - rotationX) * 0.05;
+        rotationY += (targetRotationY - rotationY) * 0.05;
+        
+        // Auto rotation component (slow spin always active)
+        const autoRotateSpeed = 0.00005; 
+        
+        // Center of screen
+        const cx = width / 2;
+        const cy = height / 2;
+
+        ctx.fillStyle = 'rgba(80, 74, 239, 0.69)'; // Dot color (dark grey)
+
+        for (let i = 0; i < dots.length; i++) {
+            const dot = dots[i];
+
+            // Rotate around Y axis
+            let x1 = dot.x * Math.cos(rotationY + autoRotateSpeed) - dot.z * Math.sin(rotationY + autoRotateSpeed);
+            let z1 = dot.z * Math.cos(rotationY + autoRotateSpeed) + dot.x * Math.sin(rotationY + autoRotateSpeed);
+            
+            // Rotate around X axis
+            let y1 = dot.y * Math.cos(rotationX) - z1 * Math.sin(rotationX);
+            let z2 = z1 * Math.cos(rotationX) + dot.y * Math.sin(rotationX);
+
+            // Update dot position for next frame
+            dot.x = x1;
+            dot.y = y1;
+            dot.z = z2;
+
+            // 3D Projection (Perspective)
+            const perspective = width; 
+            const scale = perspective / (perspective + dot.z + sphereRadius + 350); 
+            
+            const x2d = cx + dot.x * scale;
+            const y2d = cy + dot.y * scale;
+
+            // Draw dot
+            const alpha = Math.max(0.1, (scale - 0.5) * 1.5); 
+            const size = Math.max(0.5, scale * 2);
+
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = this.color;
+            ctx.arc(x2d, y2d, size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(29, 29, 31, ${alpha})`;
             ctx.fill();
         }
-        
-        // Method to update particle position
-        update() {
-            // Check if particle is still within canvas
-            if (this.x > canvas.width || this.x < 0) {
-                this.directionX = -this.directionX;
-            }
-            if (this.y > canvas.height || this.y < 0) {
-                this.directionY = -this.directionY;
-            }
-            
-            // Check collision detection - mouse position / particle position
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx*dx + dy*dy);
-            
-            if (distance < mouse.radius + this.size) {
-                if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-                    this.x += 10;
-                }
-                if (mouse.x > this.x && this.x > this.size * 10) {
-                    this.x -= 10;
-                }
-                if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-                    this.y += 10;
-                }
-                if (mouse.y > this.y && this.y > this.size * 10) {
-                    this.y -= 10;
-                }
-            }
-            
-            // Move particle
-            this.x += this.directionX;
-            this.y += this.directionY;
-            
-            // Draw particle
-            this.draw();
-        }
-    }
-    
-    // Create particle array
-    function init() {
-        particlesArray = [];
-        // Number of particles proportional to screen size
-        let numberOfParticles = (canvas.height * canvas.width) / 9000;
-        
-        for (let i = 0; i < numberOfParticles; i++) {
-            let size = (Math.random() * 3) + 1; // Random size 1-4px
-            let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-            let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-            let directionX = (Math.random() * 2) - 1; // -1 to 1 speed
-            let directionY = (Math.random() * 2) - 1;
-            // Subtle grey color for Apple style
-            let color = 'rgba(29, 29, 31, 0.15)'; 
-            
-            particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-        }
-    }
-    
-    // Animation loop
-    function animate() {
+
         requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, innerWidth, innerHeight);
-        
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update();
-        }
-        connect();
     }
-    
-    // Check if particles are close enough to draw line
-    function connect() {
-        let opacityValue = 1;
-        for (let a = 0; a < particlesArray.length; a++) {
-            for (let b = a; b < particlesArray.length; b++) {
-                let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                
-                if (distance < (canvas.width/7) * (canvas.height/7)) {
-                    opacityValue = 1 - (distance/20000);
-                    ctx.strokeStyle = 'rgba(29, 29, 31,' + opacityValue * 0.05 + ')'; // Very subtle lines
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-    
-    // Resize event
-    window.addEventListener('resize', function() {
-        canvas.width = innerWidth;
-        canvas.height = innerHeight;
-        mouse.radius = ((canvas.height/80) * (canvas.width/80));
-        init();
-    });
-    
-    // Mouse out event
-    window.addEventListener('mouseout', function() {
-        mouse.x = undefined;
-        mouse.y = undefined;
-    });
-    
-    init();
+
     animate();
 });

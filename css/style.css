@@ -14,8 +14,9 @@
     /* Layout */
     --radius-card: 24px;
     --radius-btn: 980px; /* Pill shape */
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --shadow-card: 0 8px 16px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.15);
+    --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     --container-width: 1024px; /* Apple often uses tighter containers for text content */
 }
 
@@ -44,6 +45,7 @@ body {
     height: 100%;
     z-index: -1;
     background-color: var(--bg-body); /* Background moved here */
+    filter: blur(1.5px); /* Added blur to the sphere */
 }
 
 /* Typography Defaults */

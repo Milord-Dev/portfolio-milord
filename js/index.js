@@ -39,11 +39,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let rotationX = 0;
     let rotationY = 0;
     
-    // Mouse interaction for rotation
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetRotationX = 0.001;
-    let targetRotationY = 0.001;
+    // Rotation settings
+    const autoRotateSpeedX = 0.002; // Constant rotation speed
+    const autoRotateSpeedY = 0.003;
 
     // Resize handling
     function resize() {
@@ -60,14 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     window.addEventListener('resize', resize);
-
-    // Mouse movement listener
-    window.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / width) * 2 - 1;
-        const y = (e.clientY / height) * 2 - 1;
-        targetRotationY = x * 0.01; // Rotate around Y axis based on mouse X
-        targetRotationX = -y * 0.01; // Rotate around X axis based on mouse Y
-    });
 
     // Initialize dots on sphere surface (Fibonacci Sphere algorithm for even distribution)
     function initDots() {
@@ -99,29 +89,22 @@ document.addEventListener("DOMContentLoaded", function() {
     function animate() {
         ctx.clearRect(0, 0, width, height);
         
-        // Smooth rotation update
-        rotationX += (targetRotationX - rotationX) * 0.05;
-        rotationY += (targetRotationY - rotationY) * 0.05;
-        
-        // Auto rotation component (slow spin always active)
-        const autoRotateSpeed = 0.00005; 
-        
         // Center of screen
         const cx = width / 2;
         const cy = height / 2;
 
-        ctx.fillStyle = 'rgba(80, 74, 239, 0.69)'; // Dot color (dark grey)
+        ctx.fillStyle = 'rgba(29, 29, 31, 0.6)'; // Dot color (dark grey)
 
         for (let i = 0; i < dots.length; i++) {
             const dot = dots[i];
 
             // Rotate around Y axis
-            let x1 = dot.x * Math.cos(rotationY + autoRotateSpeed) - dot.z * Math.sin(rotationY + autoRotateSpeed);
-            let z1 = dot.z * Math.cos(rotationY + autoRotateSpeed) + dot.x * Math.sin(rotationY + autoRotateSpeed);
+            let x1 = dot.x * Math.cos(autoRotateSpeedY) - dot.z * Math.sin(autoRotateSpeedY);
+            let z1 = dot.z * Math.cos(autoRotateSpeedY) + dot.x * Math.sin(autoRotateSpeedY);
             
             // Rotate around X axis
-            let y1 = dot.y * Math.cos(rotationX) - z1 * Math.sin(rotationX);
-            let z2 = z1 * Math.cos(rotationX) + dot.y * Math.sin(rotationX);
+            let y1 = dot.y * Math.cos(autoRotateSpeedX) - z1 * Math.sin(autoRotateSpeedX);
+            let z2 = z1 * Math.cos(autoRotateSpeedX) + dot.y * Math.sin(autoRotateSpeedX);
 
             // Update dot position for next frame
             dot.x = x1;
@@ -130,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // 3D Projection (Perspective)
             const perspective = width; 
-            const scale = perspective / (perspective + dot.z + sphereRadius + 350); 
+            const scale = perspective / (perspective + dot.z + sphereRadius + 200); 
             
             const x2d = cx + dot.x * scale;
             const y2d = cy + dot.y * scale;

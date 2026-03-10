@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(el);
     });
 
-    // --- 3D Sphere of Dots Animation ---
+    // --- 3D "Jellyfish" Sphere of Dots Animation ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     
@@ -36,12 +36,11 @@ document.addEventListener("DOMContentLoaded", function() {
     let sphereRadius;
     const dots = [];
     const numberOfDots = 900; 
-    let rotationX = 0;
-    let rotationY = 0;
+    let time = 0;
     
-    // Rotation settings
-    const autoRotateSpeedX = 0.002; // Constant rotation speed
-    const autoRotateSpeedY = 0.003;
+    // Rotation settings (very slow background rotation)
+    const autoRotateSpeedX = 0.0005;
+    const autoRotateSpeedY = 0.0008;
 
     // Resize handling
     function resize() {
@@ -50,8 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         canvas.width = width;
         canvas.height = height;
         
-        // Sphere radius configuration - Perfect Sphere
-        // Using 75% of the smaller dimension to fit screen
+        // Sphere radius configuration
         sphereRadius = Math.min(width, height) * 0.75; 
         
         initDots(); 
@@ -59,54 +57,63 @@ document.addEventListener("DOMContentLoaded", function() {
     
     window.addEventListener('resize', resize);
 
-    // Initialize dots on sphere surface (Fibonacci Sphere algorithm for even distribution)
+    // Initialize dots on sphere surface (Fibonacci Sphere algorithm)
     function initDots() {
-        dots.length = 0; // Clear existing dots
-        const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
+        dots.length = 0; 
+        const phi = Math.PI * (3 - Math.sqrt(5)); 
 
         for (let i = 0; i < numberOfDots; i++) {
-            const y = 1 - (i / (numberOfDots - 1)) * 2; // y goes from 1 to -1
-            const radiusAtY = Math.sqrt(1 - y * y); // Radius at y
+            const y = 1 - (i / (numberOfDots - 1)) * 2; 
+            const radiusAtY = Math.sqrt(1 - y * y); 
+            const theta = phi * i; 
             
-            const theta = phi * i; // Golden angle increment
-            
-            // Standard Sphere coordinates
-            const x = Math.cos(theta) * radiusAtY * sphereRadius;
-            const yPos = y * sphereRadius;
-            const z = Math.sin(theta) * radiusAtY * sphereRadius; 
-
+            // Store original normalized positions to apply deformations
             dots.push({
-                x: x,
-                y: yPos,
-                z: z
+                ox: Math.cos(theta) * radiusAtY, // original x normalized
+                oy: y,                           // original y normalized
+                oz: Math.sin(theta) * radiusAtY, // original z normalized
+                x: 0,
+                y: 0,
+                z: 0
             });
         }
     }
 
-    // Call resize initially to set up everything
     resize();
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
+        time += 0.01; // Progression of time for the "pulse"
         
-        // Center of screen
         const cx = width / 2;
         const cy = height / 2;
-
-        ctx.fillStyle = 'rgba(29, 29, 31, 0.6)'; // Dot color (dark grey)
 
         for (let i = 0; i < dots.length; i++) {
             const dot = dots[i];
 
-            // Rotate around Y axis
-            let x1 = dot.x * Math.cos(autoRotateSpeedY) - dot.z * Math.sin(autoRotateSpeedY);
-            let z1 = dot.z * Math.cos(autoRotateSpeedY) + dot.x * Math.sin(autoRotateSpeedY);
+            // --- Jellyfish/Organic Motion Logic ---
+            // We use Perlin-like noise (sine combinations) to create abstract deformation
+            // Pulse: The radius expands and contracts based on Y position and time
+            const pulse = Math.sin(time + dot.oy * 2) * 0.15 + 1;
             
-            // Rotate around X axis
-            let y1 = dot.y * Math.cos(autoRotateSpeedX) - z1 * Math.sin(autoRotateSpeedX);
-            let z2 = z1 * Math.cos(autoRotateSpeedX) + dot.y * Math.sin(autoRotateSpeedX);
+            // Wave: Organic horizontal deformation
+            const waveX = Math.sin(time * 0.5 + dot.oy * 3) * 0.1;
+            const waveZ = Math.cos(time * 0.5 + dot.oy * 3) * 0.1;
+            
+            // Calculate current 3D position based on original surface + deformations
+            let curX = dot.ox * sphereRadius * pulse + (waveX * sphereRadius);
+            let curY = dot.oy * sphereRadius * (pulse * 0.9); // Slightly flatter pulse vertically
+            let curZ = dot.oz * sphereRadius * pulse + (waveZ * sphereRadius);
 
-            // Update dot position for next frame
+            // Apply slow global rotation
+            const cosY = Math.cos(autoRotateSpeedY * (i % 100)); // Varied rotation per point for abstract feel
+            const sinY = Math.sin(autoRotateSpeedY * (i % 100));
+            const x1 = curX * Math.cos(time * 0.2) - curZ * Math.sin(time * 0.2);
+            const z1 = curZ * Math.cos(time * 0.2) + curX * Math.sin(time * 0.2);
+            
+            const y1 = curY * Math.cos(time * 0.1) - z1 * Math.sin(time * 0.1);
+            const z2 = z1 * Math.cos(time * 0.1) + curY * Math.sin(time * 0.1);
+
             dot.x = x1;
             dot.y = y1;
             dot.z = z2;
@@ -119,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const y2d = cy + dot.y * scale;
 
             // Draw dot
-            const alpha = Math.max(0.1, (scale - 0.5) * 1.5); 
-            const size = Math.max(0.5, scale * 2);
+            const alpha = Math.max(0.05, (scale - 0.4) * 0.8); 
+            const size = Math.max(0.5, scale * 1.8);
 
             ctx.beginPath();
             ctx.arc(x2d, y2d, size, 0, Math.PI * 2);

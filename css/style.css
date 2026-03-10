@@ -45,7 +45,7 @@ body {
     height: 100%;
     z-index: -1;
     background-color: var(--bg-body); /* Background moved here */
-    filter: blur(1.5px); /* Added blur to the sphere */
+    filter: blur(1px); /* Added blur to the sphere */
 }
 
 /* Typography Defaults */
